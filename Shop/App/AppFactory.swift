@@ -10,7 +10,7 @@ import UIKit
 class AppFactory {
   static func create() -> UIViewController {
     let navigation = UINavigationController()
-    let startScreen = ProductsListFactory.create()
+    let startScreen = HomeFactory.create()
     
     navigation.viewControllers = [startScreen]
     
