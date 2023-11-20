@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E30C2CC32B0BEE1000530D71 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2CC22B0BEE1000530D71 /* NetworkManager.swift */; };
+		E30C2CC82B0BF20A00530D71 /* Optional+Nil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2CC72B0BF20A00530D71 /* Optional+Nil.swift */; };
+		E30C2CCB2B0BF23600530D71 /* Encodable+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2CCA2B0BF23600530D71 /* Encodable+Dictionary.swift */; };
+		E30C2CCE2B0BF6AD00530D71 /* String+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2CCD2B0BF6AD00530D71 /* String+Empty.swift */; };
+		E30C2CD12B0BFAA100530D71 /* NetworkRequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2CD02B0BFAA100530D71 /* NetworkRequestConfig.swift */; };
+		E30C2CD32B0BFABA00530D71 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2CD22B0BFABA00530D71 /* NetworkResponse.swift */; };
+		E30C2CD52B0BFAD100530D71 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2CD42B0BFAD100530D71 /* NetworkError.swift */; };
+		E30C2CD82B0BFAEA00530D71 /* NetworkHttpStatusType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2CD72B0BFAEA00530D71 /* NetworkHttpStatusType.swift */; };
+		E30C2CDA2B0BFAFF00530D71 /* NetworkEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2CD92B0BFAFF00530D71 /* NetworkEndpoints.swift */; };
+		E30C2CDC2B0BFB1400530D71 /* NetworkHttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2CDB2B0BFB1400530D71 /* NetworkHttpMethod.swift */; };
 		E3D92C3E2B0AB4A100EBA968 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D92C3D2B0AB4A100EBA968 /* AppDelegate.swift */; };
 		E3D92C472B0AB4A300EBA968 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D92C462B0AB4A300EBA968 /* Assets.xcassets */; };
 		E3D92C4A2B0AB4A300EBA968 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3D92C482B0AB4A300EBA968 /* LaunchScreen.storyboard */; };
@@ -39,6 +49,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E30C2CC22B0BEE1000530D71 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		E30C2CC72B0BF20A00530D71 /* Optional+Nil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Nil.swift"; sourceTree = "<group>"; };
+		E30C2CCA2B0BF23600530D71 /* Encodable+Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Dictionary.swift"; sourceTree = "<group>"; };
+		E30C2CCD2B0BF6AD00530D71 /* String+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Empty.swift"; sourceTree = "<group>"; };
+		E30C2CD02B0BFAA100530D71 /* NetworkRequestConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestConfig.swift; sourceTree = "<group>"; };
+		E30C2CD22B0BFABA00530D71 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
+		E30C2CD42B0BFAD100530D71 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		E30C2CD72B0BFAEA00530D71 /* NetworkHttpStatusType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHttpStatusType.swift; sourceTree = "<group>"; };
+		E30C2CD92B0BFAFF00530D71 /* NetworkEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEndpoints.swift; sourceTree = "<group>"; };
+		E30C2CDB2B0BFB1400530D71 /* NetworkHttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHttpMethod.swift; sourceTree = "<group>"; };
 		E3D92C3A2B0AB4A100EBA968 /* Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D92C3D2B0AB4A100EBA968 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3D92C462B0AB4A300EBA968 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -82,6 +102,87 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E30C2CC02B0BECAA00530D71 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				E30C2CC12B0BECB900530D71 /* Network */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		E30C2CC12B0BECB900530D71 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E30C2CD62B0BFAE100530D71 /* Enum */,
+				E30C2CCF2B0BFA9700530D71 /* Models */,
+				E30C2CC22B0BEE1000530D71 /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E30C2CC42B0BF1DA00530D71 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E30C2CC52B0BF1E000530D71 /* Extensions */,
+				E30C2CC02B0BECAA00530D71 /* Managers */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		E30C2CC52B0BF1E000530D71 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E30C2CCC2B0BF69300530D71 /* String */,
+				E30C2CC92B0BF22700530D71 /* Encodable */,
+				E30C2CC62B0BF1F400530D71 /* Optional */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E30C2CC62B0BF1F400530D71 /* Optional */ = {
+			isa = PBXGroup;
+			children = (
+				E30C2CC72B0BF20A00530D71 /* Optional+Nil.swift */,
+			);
+			path = Optional;
+			sourceTree = "<group>";
+		};
+		E30C2CC92B0BF22700530D71 /* Encodable */ = {
+			isa = PBXGroup;
+			children = (
+				E30C2CCA2B0BF23600530D71 /* Encodable+Dictionary.swift */,
+			);
+			path = Encodable;
+			sourceTree = "<group>";
+		};
+		E30C2CCC2B0BF69300530D71 /* String */ = {
+			isa = PBXGroup;
+			children = (
+				E30C2CCD2B0BF6AD00530D71 /* String+Empty.swift */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
+		E30C2CCF2B0BFA9700530D71 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E30C2CD02B0BFAA100530D71 /* NetworkRequestConfig.swift */,
+				E30C2CD22B0BFABA00530D71 /* NetworkResponse.swift */,
+				E30C2CD42B0BFAD100530D71 /* NetworkError.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E30C2CD62B0BFAE100530D71 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				E30C2CD72B0BFAEA00530D71 /* NetworkHttpStatusType.swift */,
+				E30C2CD92B0BFAFF00530D71 /* NetworkEndpoints.swift */,
+				E30C2CDB2B0BFB1400530D71 /* NetworkHttpMethod.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		E3D92C312B0AB4A100EBA968 = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +206,7 @@
 		E3D92C3C2B0AB4A100EBA968 /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				E30C2CC42B0BF1DA00530D71 /* Common */,
 				E3D92C6D2B0AB64B00EBA968 /* App */,
 				E3D92C6E2B0AB66C00EBA968 /* Resources */,
 				E3D92C722B0AB78100EBA968 /* Screens */,
@@ -323,12 +425,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3D92C812B0ACB9200EBA968 /* HomePresenter.swift in Sources */,
+				E30C2CD52B0BFAD100530D71 /* NetworkError.swift in Sources */,
 				E3D92C7D2B0AC98200EBA968 /* HomeViewController.swift in Sources */,
+				E30C2CCE2B0BF6AD00530D71 /* String+Empty.swift in Sources */,
 				E3D92C712B0AB6F100EBA968 /* AppFactory.swift in Sources */,
+				E30C2CCB2B0BF23600530D71 /* Encodable+Dictionary.swift in Sources */,
 				E3D92C7B2B0AC95400EBA968 /* HomeFactory.swift in Sources */,
+				E30C2CD12B0BFAA100530D71 /* NetworkRequestConfig.swift in Sources */,
+				E30C2CC32B0BEE1000530D71 /* NetworkManager.swift in Sources */,
 				E3D92C7F2B0ACAFF00EBA968 /* HomeInteractor.swift in Sources */,
+				E30C2CD82B0BFAEA00530D71 /* NetworkHttpStatusType.swift in Sources */,
 				E3D92C3E2B0AB4A100EBA968 /* AppDelegate.swift in Sources */,
 				E3D92C782B0AB7D400EBA968 /* ProductsListFactory.swift in Sources */,
+				E30C2CC82B0BF20A00530D71 /* Optional+Nil.swift in Sources */,
+				E30C2CD32B0BFABA00530D71 /* NetworkResponse.swift in Sources */,
+				E30C2CDC2B0BFB1400530D71 /* NetworkHttpMethod.swift in Sources */,
+				E30C2CDA2B0BFAFF00530D71 /* NetworkEndpoints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
