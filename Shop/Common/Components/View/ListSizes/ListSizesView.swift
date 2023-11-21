@@ -16,13 +16,14 @@ struct ListSizesViewModel {
 
 struct ListSizesItemViewModel {
   let size: String
+  let sku: String
   let isSelected: Bool
 }
 
 // MARK: Delegate
 
 protocol ListSizesViewDelegate: AnyObject {
-  func didTapSize(size: String)
+  func didTapSize(sku: String)
 }
 
 // MARK: ListSizes
@@ -102,8 +103,8 @@ private extension ListSizesView {
   }
   
   @objc func didTapSize(button: UIButton) {
-    guard let size = viewModel?.sizes[button.tag].size else { return }
-    delegate?.didTapSize(size: size)
+    guard let sku = viewModel?.sizes[button.tag].sku else { return }
+    delegate?.didTapSize(sku: sku)
   }
   
   func getBackgroundColor(isSelected: Bool) -> UIColor {

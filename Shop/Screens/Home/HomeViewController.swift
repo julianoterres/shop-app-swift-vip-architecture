@@ -107,7 +107,7 @@ extension HomeViewController: UICollectionViewDataSource {
 // MARK: ProductListCellDelegate
 
 extension HomeViewController: ProductListCellDelegate {
-  func didTapSize(row: Int, size: String) {
-    interactor.didTapSize(row: row, size: size)
+  func didTapSize(sku:  String) {
+    interactor.didTapSize(sku: sku)
   }
 }

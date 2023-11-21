@@ -90,10 +90,10 @@ private extension HomePresenter {
     sizeSelecteds: [HomeProductSizeSelected]
   ) -> ListSizesViewModel {
     let sizes = product.sizes.filter { $0.available }.map { productSize in
-      print(sizeSelecteds.filter { $0.style == product.style && $0.size == productSize.size }.count)
       return ListSizesItemViewModel(
         size: productSize.size,
-        isSelected: sizeSelecteds.filter { $0.style == product.style && $0.size == productSize.size }.count > 0
+        sku: productSize.sku,
+        isSelected: sizeSelecteds.contains(where: { $0.sku == productSize.sku })
       )
     }
     

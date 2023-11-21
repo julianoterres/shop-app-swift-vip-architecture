@@ -6,6 +6,5 @@
 //
 
 struct HomeProductSizeSelected {
-  let size: String
-  let style: String
+  let sku: String
 }

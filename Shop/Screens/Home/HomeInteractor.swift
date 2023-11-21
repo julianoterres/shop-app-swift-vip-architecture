@@ -36,7 +36,7 @@ final class HomeInteractor {
 protocol HomeInteractorProtocol {
   func fetchProducts()
   func didTapCart()
-  func didTapSize(row: Int, size: String)
+  func didTapSize(sku: String)
 }
 
 extension HomeInteractor: HomeInteractorProtocol {
@@ -55,8 +55,8 @@ extension HomeInteractor: HomeInteractorProtocol {
     router.navigation(screen: .cart)
   }
   
-  func didTapSize(row: Int, size: String) {
-    addSizeSelected(style: products[row].style, size: size)
+  func didTapSize(sku: String) {
+    addSizeSelected(sku: sku)
     presenter.didSizeSelected(products: products, sizeSelecteds: productsSizeSelecteds)
   }
 }
@@ -74,24 +74,37 @@ private extension HomeInteractor {
     presenter.didFetchError()
   }
   
-  func addSizeSelected(style: String, size: String) {
-    if sizeAlreadySelected(style: style, size: size) {
-      deleteSizeSelected(style: style, size: size)
+  func addSizeSelected(sku: String) {
+    guard let size = products.first(where: { $0.sizes.contains(where: { $0.sku == sku }) })?.sizes.first(where: { $0.sku == sku }) else {
+      return
+    }
+    
+    if sizeAlreadySelected(size: size) {
+      deleteSizeSelected(size: size)
     }
     
     productsSizeSelecteds.append(
       HomeProductSizeSelected(
-        size: size,
-        style: style
+        sku: sku
       )
     )
   }
   
-  func sizeAlreadySelected(style: String, size: String) -> Bool {
-    productsSizeSelecteds.filter { $0.style == style }.count > 0
+  func sizeAlreadySelected(size: ProductSizeApiModel) -> Bool {
+    let skuWhithoutSize = getSkuWhithoutSize(size: size)
+    
+    return productsSizeSelecteds.contains(where: { $0.sku.contains(skuWhithoutSize) })
   }
   
-  func deleteSizeSelected(style: String, size: String) {
-    productsSizeSelecteds = productsSizeSelecteds.filter { $0.style != style }
+  func deleteSizeSelected(size: ProductSizeApiModel) {
+    let skuWhithoutSize = getSkuWhithoutSize(size: size)
+    
+    productsSizeSelecteds = productsSizeSelecteds.filter {
+      $0.sku.notContains(skuWhithoutSize)
+    }
+  }
+  
+  func getSkuWhithoutSize(size: ProductSizeApiModel) -> String {
+    size.sku.replacingOccurrences(of: size.size, with: "")
   }
 }

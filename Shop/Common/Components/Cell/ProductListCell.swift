@@ -22,7 +22,7 @@ struct ProductListCellViewModel {
 // MARK: Delegate
 
 protocol ProductListCellDelegate: AnyObject {
-  func didTapSize(row: Int, size: String)
+  func didTapSize(sku:  String)
 }
 
 // MARK: HomeView
@@ -164,10 +164,9 @@ extension ProductListCell: CodeView {
 // MARK: ListSizesViewDelegate
 
 extension ProductListCell: ListSizesViewDelegate {
-  func didTapSize(size: String) {
+  func didTapSize(sku: String) {
     delegate?.didTapSize(
-      row: indexPath?.row ?? 0,
-      size: size
+      sku: sku
     )
   }
 }
