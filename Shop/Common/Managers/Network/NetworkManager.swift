@@ -7,15 +7,15 @@ final class NetworkManager {}
 // MARK: NetworkManagerProtocol
 
 protocol NetworkManagerProtocol {
-  func request<ResponseType: Codable, Body: Codable>(
-    configs: NetworkRequestConfig<ResponseType, Body>,
+  func request<ResponseType: Codable>(
+    configs: NetworkRequestConfig<ResponseType>,
     completion: @escaping (Result<NetworkResponse<ResponseType>, NetworkError>) -> Void
   )
 }
 
 extension NetworkManager: NetworkManagerProtocol {
-  func request<ResponseType: Codable, Body: Codable>(
-    configs: NetworkRequestConfig<ResponseType, Body>,
+  func request<ResponseType: Codable>(
+    configs: NetworkRequestConfig<ResponseType>,
     completion: @escaping (Result<NetworkResponse<ResponseType>, NetworkError>) -> Void
   ) {
     callRequest(configs: configs, completion: completion)
@@ -25,8 +25,8 @@ extension NetworkManager: NetworkManagerProtocol {
 // MARK: Private Methods
 
 private extension NetworkManager {
-  func callRequest<ResponseType: Codable, Body: Codable>(
-    configs: NetworkRequestConfig<ResponseType, Body>,
+  func callRequest<ResponseType: Codable>(
+    configs: NetworkRequestConfig<ResponseType>,
     completion: @escaping (Result<NetworkResponse<ResponseType>, NetworkError>) -> Void
   ) {
       let request = createBaseRequest(configs: configs)
@@ -39,6 +39,15 @@ private extension NetworkManager {
             completion: completion
           )
       }.resume()
+  }
+  
+  func createBaseRequest<ResponseType: Codable>(configs: NetworkRequestConfig<ResponseType>) -> URLRequest {
+    let url = configs.endPoint.url
+    var request = URLRequest(url: URL(string: url)!)
+    
+    request.httpMethod = configs.method.rawValue
+
+    return request
   }
   
   func makeRequestResponse<ResponseType: Codable>(
@@ -87,54 +96,5 @@ private extension NetworkManager {
     let response = NetworkResponse(data: data)
     
     completion(.success(response))
-  }
-  
-  func createBaseRequest<ResponseType: Codable, Body: Codable>(configs: NetworkRequestConfig<ResponseType, Body>) -> URLRequest {
-    let url = makeBaseUrl(configs: configs)
-    let request = makeRequest(url: url, configs: configs)
-    return request
-  }
-
-  func makeRequest<ResponseType: Codable, Body: Codable>(url: String, configs: NetworkRequestConfig<ResponseType, Body>) -> URLRequest {
-    var request = URLRequest(url: URL(string: url)!)
-    request.httpMethod = configs.method.rawValue
-
-    if configs.body.isNotNil, configs.method == .post {
-      request.httpBody = try? JSONEncoder().encode(configs.body)
-    }
-
-    return request
-  }
-  
-  func makeBaseUrl<ResponseType: Codable, Body: Codable>(configs: NetworkRequestConfig<ResponseType, Body>) -> String {
-    var baseUrl = configs.endPoint.url
-    
-    if getRequestHasParameters(configs: configs) {
-      baseUrl = createBaseUrlWithParameters(baseUrl: baseUrl, body: configs.body)
-    }
-
-    return baseUrl
-  }
-  
-  func getRequestHasParameters<ResponseType: Codable, Body: Codable>(configs: NetworkRequestConfig<ResponseType, Body>) -> Bool {
-    return configs.body.isNotNil && configs.method == .get && configs.body?.asDictionary?.count ?? 0 >= 1
-  }
-  
-  func createBaseUrlWithParameters(baseUrl: String, body: Codable?) -> String {
-    guard let parameters = body?.asDictionary, parameters.count > 0 else {
-      return baseUrl
-    }
-    
-    var baseUrl = baseUrl
-    var queryParameters: [String] = []
-    
-    parameters.forEach { key, value in
-      let parameter = "\(key)=\(value)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? .empty
-      queryParameters.append(parameter)
-    }
-    
-    baseUrl = "\(baseUrl)?\(queryParameters.joined(separator: "&"))"
-    
-    return baseUrl
   }
 }

@@ -9,11 +9,11 @@ enum NetworkEndpoints: String, Codable {
   // MARK: Public Properties
 
   var url: String {
-    let baseURL = "http://www.mocky.io/v2"
+    let baseURL = "https://run.mocky.io/v3"
     return "\(baseURL)\(rawValue)"
   }
 
   // MARK: Products
 
-  case productsList = "/59b6a65a0f0000e90471257d"
+  case productsList = "/211abc1c-d875-487c-9819-4e4b41905b4a"
 }

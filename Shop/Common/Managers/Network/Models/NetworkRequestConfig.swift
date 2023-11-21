@@ -5,9 +5,8 @@
 //  Created by Juliano Terres on 20/11/23.
 //
 
-struct NetworkRequestConfig<ResponseType: Codable, Body: Codable> {
+struct NetworkRequestConfig<ResponseType: Codable> {
   let method: NetworkHttpMethod
   let endPoint: NetworkEndpoints
-  var body: Body?
   let responseType: ResponseType.Type
 }

@@ -7,18 +7,31 @@
 
 import UIKit
 
+// MARK: HomeFactory
+
 final class HomeFactory {
   static func create() -> UIViewController {
+    let network = NetworkManager()
     
-    let presenter = HomePresenter(
+    let presenter = HomePresenter()
       
+    let productsService = ProductsService(
+      network: network
+    )
+    
+    let service = HomeService(
+      productsService: productsService
     )
     
     let interactor = HomeInteractor(
-      presenter: presenter
+      presenter: presenter,
+      service: service
     )
     
+    let homeView = HomeView()
+    
     let viewController = HomeViewController(
+      screenView: homeView,
       interactor: interactor
     )
     
