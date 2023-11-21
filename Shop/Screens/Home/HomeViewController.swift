@@ -72,8 +72,22 @@ private extension HomeViewController {
   func setupDelegates() {
     screenView.setupCollection(delegate: self)
   }
+  
+  func addCardButtonInNavigation() {
+    let button = UIBarButtonItem(
+      title: "Carrinho",
+      image: nil,
+      target: self,
+      action: #selector(didTapCart)
+    )
+    
+    navigationItem.rightBarButtonItem = button
+  }
+    
+  @objc func didTapCart() {
+    interactor.didTapCart()
+  }
 }
-
 
 // MARK: UICollectionViewDataSource
 

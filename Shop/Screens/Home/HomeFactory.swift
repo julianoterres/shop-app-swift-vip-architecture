@@ -23,9 +23,12 @@ final class HomeFactory {
       productsService: productsService
     )
     
+    let router = HomeRouter()
+    
     let interactor = HomeInteractor(
       presenter: presenter,
-      service: service
+      service: service,
+      router: router
     )
     
     let homeView = HomeView()
@@ -36,6 +39,7 @@ final class HomeFactory {
     )
     
     presenter.viewController = viewController
+    router.viewController = viewController
     
     return viewController
   }

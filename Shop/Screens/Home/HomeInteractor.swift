@@ -14,16 +14,19 @@ final class HomeInteractor {
   
   private let presenter: HomePresenterProtocol
   private let service: HomeServiceProtocol
+  private let router: HomeRouterProtocol
   private var products: [ProductApiModel] = []
   
   // MARK: Initialization
   
   init(
     presenter: HomePresenterProtocol,
-    service: HomeServiceProtocol
+    service: HomeServiceProtocol,
+    router: HomeRouterProtocol
   ) {
     self.presenter = presenter
     self.service = service
+    self.router = router
   }
 }
 
@@ -31,6 +34,7 @@ final class HomeInteractor {
 
 protocol HomeInteractorProtocol {
   func fetchProducts()
+  func didTapCart()
 }
 
 extension HomeInteractor: HomeInteractorProtocol {
@@ -43,6 +47,10 @@ extension HomeInteractor: HomeInteractorProtocol {
         self?.didFetchProductsListFailure()
       }
     }
+  }
+  
+  func didTapCart() {
+    router.navigation(screen: .cart)
   }
 }
 

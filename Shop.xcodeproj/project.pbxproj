@@ -34,6 +34,7 @@
 		E30C2D0B2B0C3CAE00530D71 /* ListSizesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2D0A2B0C3CAE00530D71 /* ListSizesView.swift */; };
 		E30C2D0E2B0C400200530D71 /* UIStackView+SubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2D0D2B0C400200530D71 /* UIStackView+SubViews.swift */; };
 		E30C2D112B0C43B000530D71 /* ListPricesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2D102B0C43B000530D71 /* ListPricesView.swift */; };
+		E30C2D132B0C4E3400530D71 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2D122B0C4E3400530D71 /* HomeRouter.swift */; };
 		E3D92C3E2B0AB4A100EBA968 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D92C3D2B0AB4A100EBA968 /* AppDelegate.swift */; };
 		E3D92C472B0AB4A300EBA968 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3D92C462B0AB4A300EBA968 /* Assets.xcassets */; };
 		E3D92C4A2B0AB4A300EBA968 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3D92C482B0AB4A300EBA968 /* LaunchScreen.storyboard */; };
@@ -90,6 +91,7 @@
 		E30C2D0A2B0C3CAE00530D71 /* ListSizesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSizesView.swift; sourceTree = "<group>"; };
 		E30C2D0D2B0C400200530D71 /* UIStackView+SubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+SubViews.swift"; sourceTree = "<group>"; };
 		E30C2D102B0C43B000530D71 /* ListPricesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPricesView.swift; sourceTree = "<group>"; };
+		E30C2D122B0C4E3400530D71 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		E3D92C3A2B0AB4A100EBA968 /* Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3D92C3D2B0AB4A100EBA968 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3D92C462B0AB4A300EBA968 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 				E3D92C7A2B0AC95400EBA968 /* HomeFactory.swift */,
 				E3D92C7E2B0ACAFF00EBA968 /* HomeInteractor.swift */,
 				E3D92C802B0ACB9200EBA968 /* HomePresenter.swift */,
+				E30C2D122B0C4E3400530D71 /* HomeRouter.swift */,
 				E30C2CDD2B0C154E00530D71 /* HomeService.swift */,
 				E30C2CEE2B0C216D00530D71 /* HomeView.swift */,
 				E3D92C7C2B0AC98200EBA968 /* HomeViewController.swift */,
@@ -603,6 +606,7 @@
 				E30C2CE72B0C178700530D71 /* ProductApiModel.swift in Sources */,
 				E30C2CDE2B0C154E00530D71 /* HomeService.swift in Sources */,
 				E30C2CD82B0BFAEA00530D71 /* NetworkHttpStatusType.swift in Sources */,
+				E30C2D132B0C4E3400530D71 /* HomeRouter.swift in Sources */,
 				E30C2D012B0C2D1300530D71 /* UIView+Reusable.swift in Sources */,
 				E3D92C3E2B0AB4A100EBA968 /* AppDelegate.swift in Sources */,
 				E30C2CC82B0BF20A00530D71 /* Optional+Nil.swift in Sources */,
