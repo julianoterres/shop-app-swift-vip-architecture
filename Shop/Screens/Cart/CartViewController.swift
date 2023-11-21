@@ -14,6 +14,7 @@ final class CartViewController: UIViewController {
   
   private let interactor: CartInteractorProtocol
   private let screenView: CartViewProtocol
+  private var products: [CartProductListCellViewModel] = []
   
   // MARK: Inicialization
 
@@ -36,6 +37,7 @@ final class CartViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+    interactor.fetchProducts()
   }
   
   override func loadView() {
@@ -46,9 +48,14 @@ final class CartViewController: UIViewController {
 // MARK: CartPresenterProtocol
 
 protocol CartViewControllerProtocol: AnyObject {
+  func present(products: [CartProductListCellViewModel])
 }
 
 extension CartViewController: CartViewControllerProtocol {
+  func present(products: [CartProductListCellViewModel]) {
+    self.products = products
+    screenView.reloadProducts()
+  }
 }
 
 // MARK: Private Methods
@@ -56,9 +63,37 @@ extension CartViewController: CartViewControllerProtocol {
 private extension CartViewController {
   func setup() {
     setupTitle()
+    setupDelegates()
   }
   
   func setupTitle() {
     title = "Carrinho"
+  }
+  
+  func setupDelegates() {
+    screenView.setupCollection(delegate: self)
+  }
+}
+
+// MARK: UICollectionViewDataSource
+
+extension CartViewController: UICollectionViewDataSource {
+  func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
+    return products.count
+  }
+
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell: CartProductListCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+    cell.viewModel = products[indexPath.row]
+    cell.delegate = self
+    return cell
+  }
+}
+
+// MARK: CartProductListCellDelegate
+
+extension CartViewController: CartProductListCellDelegate {
+  func didTapRemove(indexPath: IndexPath?) {
+    interactor.didTapRemove(indexPath: indexPath)
   }
 }

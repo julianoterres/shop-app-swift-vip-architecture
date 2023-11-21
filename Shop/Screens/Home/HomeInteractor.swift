@@ -71,7 +71,7 @@ extension HomeInteractor: HomeInteractorProtocol {
       return
     }
     
-    addProductCart(product: data.product, size: data.producSize.size)
+    addProductCart(product: data.product, sku: data.producSize.sku ,size: data.producSize.size)
     deleteSizeSelected(size: data.producSize)
     
     presenter.didProductAddCartSucccess()
@@ -147,8 +147,9 @@ private extension HomeInteractor {
     return (product, productSize)
   }
   
-  func addProductCart(product: ProductApiModel, size: String) {
+  func addProductCart(product: ProductApiModel, sku: String, size: String) {
     let product = CartProductsModel(
+      sku: sku,
       name: product.name,
       image: product.image,
       size: size,

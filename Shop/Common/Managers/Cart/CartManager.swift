@@ -13,7 +13,6 @@ final class CartManager {
   // MARK: Private Properties
   
   private let session: SessionManagerProtocol
-  private var products: [CartProductsModel] = []
   
   // MARK: Inititalization
   
@@ -26,6 +25,8 @@ final class CartManager {
 
 protocol CartManagerProtocol {
   func add(product: CartProductsModel)
+  func remove(product: CartProductsModel)
+  func getProducts() -> [CartProductsModel]
 }
 
 extension CartManager: CartManagerProtocol {
@@ -34,10 +35,21 @@ extension CartManager: CartManagerProtocol {
       return
     }
     
-    var productsCart = getProductsCart()
+    var productsCart = getProducts()
     productsCart.append(product)
     
     session.save(value: productsCart, key: .cart)
+  }
+  
+  func getProducts() -> [CartProductsModel] {
+    session.get(dataType: [CartProductsModel].self, key: .cart) ?? []
+  }
+  
+  func remove(product: CartProductsModel) {
+    let allProducts = getProducts()
+    let allProductsNew = allProducts.filter { $0 != product }
+    
+    session.save(value: allProductsNew, key: .cart)
   }
 }
 
@@ -45,12 +57,7 @@ extension CartManager: CartManagerProtocol {
 
 private extension CartManager {
   func productAlreadyAddCart(product: CartProductsModel) -> Bool {
-    let productsCart = getProductsCart()
-    
-    return productsCart.contains(where: { $0 == product })
-  }
-  
-  func getProductsCart() -> [CartProductsModel] {
-    session.get(dataType: [CartProductsModel].self, key: .cart) ?? []
+    let products = getProducts()
+    return products.contains(where: { $0 == product })
   }
 }

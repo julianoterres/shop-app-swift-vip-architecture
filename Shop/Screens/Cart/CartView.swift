@@ -20,9 +20,9 @@ class CartView: UIView {
     layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-    collectionView.backgroundColor = .red
+    collectionView.backgroundColor = .clear
     collectionView.showsVerticalScrollIndicator = false
-    collectionView.register(ProductListCell.self)
+    collectionView.register(CartProductListCell.self)
     
     return collectionView
   }()
