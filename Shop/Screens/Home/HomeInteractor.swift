@@ -15,6 +15,7 @@ final class HomeInteractor {
   private let presenter: HomePresenterProtocol
   private let service: HomeServiceProtocol
   private let router: HomeRouterProtocol
+  private let cart: CartManagerProtocol
   private var products: [ProductApiModel] = []
   private var productsSizeSelecteds: [HomeProductSizeSelected] = []
   
@@ -23,11 +24,13 @@ final class HomeInteractor {
   init(
     presenter: HomePresenterProtocol,
     service: HomeServiceProtocol,
-    router: HomeRouterProtocol
+    router: HomeRouterProtocol,
+    cart: CartManagerProtocol
   ) {
     self.presenter = presenter
     self.service = service
     self.router = router
+    self.cart = cart
   }
 }
 
@@ -37,6 +40,7 @@ protocol HomeInteractorProtocol {
   func fetchProducts()
   func didTapCart()
   func didTapSize(sku: String)
+  func didTapAddCart(indexPath: IndexPath?)
 }
 
 extension HomeInteractor: HomeInteractorProtocol {
@@ -59,6 +63,20 @@ extension HomeInteractor: HomeInteractorProtocol {
     addSizeSelected(sku: sku)
     presenter.didSizeSelected(products: products, sizeSelecteds: productsSizeSelecteds)
   }
+  
+  func didTapAddCart(indexPath: IndexPath?) {
+    guard let row = indexPath?.row,
+          let data = getProductSelected(row: row) else {
+      presenter.didProductAddCartFailure()
+      return
+    }
+    
+    addProductCart(product: data.product, size: data.producSize.size)
+    deleteSizeSelected(size: data.producSize)
+    
+    presenter.didProductAddCartSucccess()
+    presenter.didSizeSelected(products: products, sizeSelecteds: productsSizeSelecteds)
+  }
 }
 
 // MARK: Private Methods
@@ -71,11 +89,11 @@ private extension HomeInteractor {
   }
   
   func didFetchProductsListFailure() {
-    presenter.didFetchError()
+    presenter.didFetchFailure()
   }
   
   func addSizeSelected(sku: String) {
-    guard let size = products.first(where: { $0.sizes.contains(where: { $0.sku == sku }) })?.sizes.first(where: { $0.sku == sku }) else {
+    guard let size = getSizeProduct(sku: sku) else {
       return
     }
     
@@ -88,6 +106,10 @@ private extension HomeInteractor {
         sku: sku
       )
     )
+  }
+  
+  func getSizeProduct(sku: String) -> ProductSizeApiModel? {
+    products.first(where: { $0.sizes.contains(where: { $0.sku == sku }) })?.sizes.first(where: { $0.sku == sku })
   }
   
   func sizeAlreadySelected(size: ProductSizeApiModel) -> Bool {
@@ -106,5 +128,33 @@ private extension HomeInteractor {
   
   func getSkuWhithoutSize(size: ProductSizeApiModel) -> String {
     size.sku.replacingOccurrences(of: size.size, with: "")
+  }
+  
+  func getProductSelected(row: Int) -> (product: ProductApiModel, producSize: ProductSizeApiModel)? {
+    let product = products[row]
+    
+    guard let size = product.sizes.first else {
+      return nil
+    }
+    
+    let skuWihtoutSize = getSkuWhithoutSize(size: size)
+    
+    guard let sizeSelected = productsSizeSelecteds.first(where: { $0.sku.contains(skuWihtoutSize) }),
+          let productSize = product.sizes.first(where: { $0.sku == sizeSelected.sku }) else {
+      return nil
+    }
+    
+    return (product, productSize)
+  }
+  
+  func addProductCart(product: ProductApiModel, size: String) {
+    let product = CartProductsModel(
+      name: product.name,
+      image: product.image,
+      size: size,
+      price: product.actualPrice
+    )
+    
+    cart.add(product: product)
   }
 }

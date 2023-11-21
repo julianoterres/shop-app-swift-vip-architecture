@@ -37,7 +37,6 @@ final class HomeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-    setupDelegates()
     interactor.fetchProducts()
   }
   
@@ -50,7 +49,7 @@ final class HomeViewController: UIViewController {
 
 protocol HomeViewControllerProtocol: AnyObject {
   func present(products: [ProductListCellViewModel])
-  func present(error: String)
+  func present(title: String, message: String)
 }
 
 extension HomeViewController: HomeViewControllerProtocol {
@@ -59,13 +58,23 @@ extension HomeViewController: HomeViewControllerProtocol {
     screenView.reloadProducts()
   }
   
-  func present(error: String) {}
+  func present(title: String, message: String) {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+    present(alert, animated: true, completion: nil)
+  }
 }
 
 // MARK: Private Methods
 
 private extension HomeViewController {
   func setup() {
+    setupTitle()
+    addCardButtonInNavigation()
+    setupDelegates()
+  }
+  
+  func setupTitle() {
     title = "Produtos"
   }
   
@@ -109,5 +118,9 @@ extension HomeViewController: UICollectionViewDataSource {
 extension HomeViewController: ProductListCellDelegate {
   func didTapSize(sku:  String) {
     interactor.didTapSize(sku: sku)
+  }
+  
+  func didTapAddCart(indexPath: IndexPath?) {
+    interactor.didTapAddCart(indexPath: indexPath)
   }
 }

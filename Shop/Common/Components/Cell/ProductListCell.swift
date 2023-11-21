@@ -22,7 +22,8 @@ struct ProductListCellViewModel {
 // MARK: Delegate
 
 protocol ProductListCellDelegate: AnyObject {
-  func didTapSize(sku:  String)
+  func didTapSize(sku: String)
+  func didTapAddCart(indexPath: IndexPath?)
 }
 
 // MARK: HomeView
@@ -88,6 +89,7 @@ class ProductListCell: UICollectionViewCell {
     element.backgroundColor = .black
     element.setTitle("Adicionar no carriho", for: .normal)
     element.setTitleColor(.white, for: .normal)
+    element.addTarget(self, action: #selector(didTapAddCart), for: .touchUpInside)
     return element
   }()
   
@@ -211,5 +213,9 @@ private extension ProductListCell {
     promotionLabel.isHidden = false
     pricesView.clear()
     sizesView.clear()
+  }
+  
+  @objc func didTapAddCart() {
+    delegate?.didTapAddCart(indexPath: indexPath)
   }
 }

@@ -13,6 +13,8 @@ final class HomeFactory {
   static func create() -> UIViewController {
     let network = NetworkManager()
     
+    let cart = CartManager()
+    
     let presenter = HomePresenter()
       
     let productsService = ProductsService(
@@ -28,7 +30,8 @@ final class HomeFactory {
     let interactor = HomeInteractor(
       presenter: presenter,
       service: service,
-      router: router
+      router: router,
+      cart: cart
     )
     
     let homeView = HomeView()

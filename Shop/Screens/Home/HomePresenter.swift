@@ -23,8 +23,10 @@ final class HomePresenter {
 
 protocol HomePresenterProtocol {
   func didFetchSuccess(products: [ProductApiModel])
-  func didFetchError()
+  func didFetchFailure()
   func didSizeSelected(products: [ProductApiModel], sizeSelecteds: [HomeProductSizeSelected])
+  func didProductAddCartSucccess()
+  func didProductAddCartFailure()
 }
 
 extension HomePresenter: HomePresenterProtocol {
@@ -32,12 +34,20 @@ extension HomePresenter: HomePresenterProtocol {
     presentProducts(products: products)
   }
   
-  func didFetchError() {
-    viewController?.present(error: "Falha ao encontrar os produtos")
+  func didFetchFailure() {
+    viewController?.present(title: "Erro", message: "Falha ao encontrar os produtos")
   }
   
   func didSizeSelected(products: [ProductApiModel], sizeSelecteds: [HomeProductSizeSelected]) {
     presentProducts(products: products, sizeSelecteds: sizeSelecteds)
+  }
+  
+  func didProductAddCartSucccess() {
+    viewController?.present(title: "Sucesso", message: "Produto adicionado ao carrinho.")
+  }
+  
+  func didProductAddCartFailure() {
+    viewController?.present(title: "Erro", message: "Produto não adicionado ao carrinho.")
   }
 }
 
