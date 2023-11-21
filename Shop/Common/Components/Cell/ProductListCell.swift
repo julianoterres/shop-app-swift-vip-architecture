@@ -19,6 +19,12 @@ struct ProductListCellViewModel {
   let sizes: ListSizesViewModel
 }
 
+// MARK: Delegate
+
+protocol ProductListCellDelegate: AnyObject {
+  func didTapSize(row: Int, size: String)
+}
+
 // MARK: HomeView
 
 class ProductListCell: UICollectionViewCell {
@@ -29,6 +35,8 @@ class ProductListCell: UICollectionViewCell {
       setup()
     }
   }
+  
+  weak var delegate: ProductListCellDelegate?
   
   // MARK: Elements
 
@@ -71,6 +79,7 @@ class ProductListCell: UICollectionViewCell {
   
   lazy var sizesView: ListSizesView = {
     let element = ListSizesView()
+    element.delegate = self
     return element
   }()
   
@@ -149,6 +158,17 @@ extension ProductListCell: CodeView {
 
   func setupAditionalConfiguration() {
     backgroundColor = .white
+  }
+}
+
+// MARK: ListSizesViewDelegate
+
+extension ProductListCell: ListSizesViewDelegate {
+  func didTapSize(size: String) {
+    delegate?.didTapSize(
+      row: indexPath?.row ?? 0,
+      size: size
+    )
   }
 }
 

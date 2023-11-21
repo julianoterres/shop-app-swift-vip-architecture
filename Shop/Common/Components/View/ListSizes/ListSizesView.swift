@@ -11,7 +11,18 @@ import UIKit
 // MARK: View Model
 
 struct ListSizesViewModel {
-  let sizes: [String]
+  let sizes: [ListSizesItemViewModel]
+}
+
+struct ListSizesItemViewModel {
+  let size: String
+  let isSelected: Bool
+}
+
+// MARK: Delegate
+
+protocol ListSizesViewDelegate: AnyObject {
+  func didTapSize(size: String)
 }
 
 // MARK: ListSizes
@@ -25,6 +36,8 @@ class ListSizesView: UIView {
     }
   }
 
+  weak var delegate: ListSizesViewDelegate?
+  
   // MARK: Elements
 
   lazy var container: UIStackView = {
@@ -71,19 +84,30 @@ private extension ListSizesView {
   }
   
   func addSizes() {
-    viewModel?.sizes.forEach({
-      add(size: $0)
+    viewModel?.sizes.enumerated().forEach({ (index, item) in
+      add(index: index, item: item)
     })
   }
   
-  func add(size: String) {
+  func add(index: Int, item: ListSizesItemViewModel) {
     let button = UIButton()
     
-    button.setTitle(size, for: .normal)
+    button.setTitle(item.size, for: .normal)
     button.setTitleColor(.white, for: .normal)
-    button.backgroundColor = .lightGray
+    button.backgroundColor = getBackgroundColor(isSelected: item.isSelected)
+    button.tag = index
+    button.addTarget(self, action: #selector(didTapSize), for: .touchUpInside)
     
     container.addArrangedSubview(button)
+  }
+  
+  @objc func didTapSize(button: UIButton) {
+    guard let size = viewModel?.sizes[button.tag].size else { return }
+    delegate?.didTapSize(size: size)
+  }
+  
+  func getBackgroundColor(isSelected: Bool) -> UIColor {
+    isSelected ? .black : .lightGray
   }
 }
 

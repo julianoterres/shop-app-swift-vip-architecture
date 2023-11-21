@@ -12,7 +12,7 @@ import UIKit
 final class HomeRouter {
   // MARK: Public Properties
   
-  weak var viewController: UIViewController?
+  var viewController: UIViewController?
   
   // MARK: Screens
   

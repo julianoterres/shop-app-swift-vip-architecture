@@ -99,13 +99,15 @@ extension HomeViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell: ProductListCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
     cell.viewModel = products[indexPath.row]
+    cell.delegate = self
     return cell
   }
 }
 
-// MARK: UICollectionViewDelegate
+// MARK: ProductListCellDelegate
 
-extension HomeViewController: UICollectionViewDelegate {
-  func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+extension HomeViewController: ProductListCellDelegate {
+  func didTapSize(row: Int, size: String) {
+    interactor.didTapSize(row: row, size: size)
   }
 }

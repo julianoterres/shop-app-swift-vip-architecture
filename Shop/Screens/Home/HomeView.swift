@@ -66,7 +66,7 @@ extension HomeView: CodeView {
 
 protocol HomeViewProtocol: UIView {
   func reloadProducts()
-  func setupCollection(delegate: (UICollectionViewDataSource & UICollectionViewDelegate))
+  func setupCollection(delegate: (UICollectionViewDataSource))
 }
 
 extension HomeView: HomeViewProtocol {
@@ -74,8 +74,7 @@ extension HomeView: HomeViewProtocol {
     collectionView.reloadData()
   }
   
-  func setupCollection(delegate: (UICollectionViewDataSource & UICollectionViewDelegate)) {
+  func setupCollection(delegate: (UICollectionViewDataSource)) {
     collectionView.dataSource = delegate
-    collectionView.delegate = delegate
   }
 }

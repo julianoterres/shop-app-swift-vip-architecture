@@ -13,6 +13,10 @@ final class HomePresenter {
   // MARK: Public Properties
   
   weak var viewController: HomeViewControllerProtocol?
+  
+  // MARK: Private Properties
+  
+  private var products: [ProductListCellViewModel] = []
 }
 
 // MARK: HomePresenterProtocol
@@ -20,35 +24,56 @@ final class HomePresenter {
 protocol HomePresenterProtocol {
   func didFetchSuccess(products: [ProductApiModel])
   func didFetchError()
+  func didSizeSelected(products: [ProductApiModel], sizeSelecteds: [HomeProductSizeSelected])
 }
 
 extension HomePresenter: HomePresenterProtocol {
   func didFetchSuccess(products: [ProductApiModel]) {
-    let products = parseProducts(products: products)
-    viewController?.present(products: products)
+    presentProducts(products: products)
   }
   
   func didFetchError() {
     viewController?.present(error: "Falha ao encontrar os produtos")
+  }
+  
+  func didSizeSelected(products: [ProductApiModel], sizeSelecteds: [HomeProductSizeSelected]) {
+    presentProducts(products: products, sizeSelecteds: sizeSelecteds)
   }
 }
 
 // MARK: Private Methods
 
 private extension HomePresenter {
-  func parseProducts(products: [ProductApiModel]) -> [ProductListCellViewModel] {
+  func presentProducts(
+    products: [ProductApiModel],
+    sizeSelecteds: [HomeProductSizeSelected] = []
+  ) {
+    self.products = parseProducts(products: products, sizeSelecteds: sizeSelecteds)
+    viewController?.present(products: self.products)
+  }
+  
+  func parseProducts(
+    products: [ProductApiModel],
+    sizeSelecteds: [HomeProductSizeSelected]
+  ) -> [ProductListCellViewModel] {
     return products.map {
-      parseProductApiToProductViewModel(product: $0)
+      parseProductApiToProductViewModel(
+        product: $0,
+        sizeSelecteds: sizeSelecteds
+      )
     }
   }
   
-  func parseProductApiToProductViewModel(product: ProductApiModel) -> ProductListCellViewModel {
+  func parseProductApiToProductViewModel(
+    product: ProductApiModel,
+    sizeSelecteds: [HomeProductSizeSelected]
+  ) -> ProductListCellViewModel {
     ProductListCellViewModel(
       image: URL(string: product.image),
       name: product.name,
       promotionText: product.onSale ? "Em promoção" : .empty,
       prices: parsePrices(product: product),
-      sizes: parseSizes(product: product)
+      sizes: parseSizes(product: product, sizeSelecteds: sizeSelecteds)
     )
   }
   
@@ -60,9 +85,16 @@ private extension HomePresenter {
     )
   }
   
-  func parseSizes(product: ProductApiModel) -> ListSizesViewModel {
-    let sizes = product.sizes.filter { $0.available }.map {
-      $0.size
+  func parseSizes(
+    product: ProductApiModel,
+    sizeSelecteds: [HomeProductSizeSelected]
+  ) -> ListSizesViewModel {
+    let sizes = product.sizes.filter { $0.available }.map { productSize in
+      print(sizeSelecteds.filter { $0.style == product.style && $0.size == productSize.size }.count)
+      return ListSizesItemViewModel(
+        size: productSize.size,
+        isSelected: sizeSelecteds.filter { $0.style == product.style && $0.size == productSize.size }.count > 0
+      )
     }
     
     return ListSizesViewModel(sizes: sizes)

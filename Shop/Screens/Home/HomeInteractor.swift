@@ -16,6 +16,7 @@ final class HomeInteractor {
   private let service: HomeServiceProtocol
   private let router: HomeRouterProtocol
   private var products: [ProductApiModel] = []
+  private var productsSizeSelecteds: [HomeProductSizeSelected] = []
   
   // MARK: Initialization
   
@@ -35,6 +36,7 @@ final class HomeInteractor {
 protocol HomeInteractorProtocol {
   func fetchProducts()
   func didTapCart()
+  func didTapSize(row: Int, size: String)
 }
 
 extension HomeInteractor: HomeInteractorProtocol {
@@ -52,6 +54,11 @@ extension HomeInteractor: HomeInteractorProtocol {
   func didTapCart() {
     router.navigation(screen: .cart)
   }
+  
+  func didTapSize(row: Int, size: String) {
+    addSizeSelected(style: products[row].style, size: size)
+    presenter.didSizeSelected(products: products, sizeSelecteds: productsSizeSelecteds)
+  }
 }
 
 // MARK: Private Methods
@@ -65,5 +72,26 @@ private extension HomeInteractor {
   
   func didFetchProductsListFailure() {
     presenter.didFetchError()
+  }
+  
+  func addSizeSelected(style: String, size: String) {
+    if sizeAlreadySelected(style: style, size: size) {
+      deleteSizeSelected(style: style, size: size)
+    }
+    
+    productsSizeSelecteds.append(
+      HomeProductSizeSelected(
+        size: size,
+        style: style
+      )
+    )
+  }
+  
+  func sizeAlreadySelected(style: String, size: String) -> Bool {
+    productsSizeSelecteds.filter { $0.style == style }.count > 0
+  }
+  
+  func deleteSizeSelected(style: String, size: String) {
+    productsSizeSelecteds = productsSizeSelecteds.filter { $0.style != style }
   }
 }
