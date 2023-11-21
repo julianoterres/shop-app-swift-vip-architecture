@@ -1,16 +1,16 @@
 //
-//  HomeView.swift
+//  CartView.swift
 //  Shop
 //
-//  Created by Juliano Terres on 20/11/23.
+//  Created by Juliano Terres on 21/11/23.
 //
 
 import SnapKit
 import UIKit
 
-// MARK: HomeView
+// MARK: CartView
 
-class HomeView: UIView {
+class CartView: UIView {
   // MARK: Elements
 
   lazy var collectionView: UICollectionView = {
@@ -20,7 +20,7 @@ class HomeView: UIView {
     layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-    collectionView.backgroundColor = .clear
+    collectionView.backgroundColor = .red
     collectionView.showsVerticalScrollIndicator = false
     collectionView.register(ProductListCell.self)
     
@@ -42,7 +42,7 @@ class HomeView: UIView {
 
 // MARK: CodeView
 
-extension HomeView: CodeView {
+extension CartView: CodeView {
   func buildViewHierarchy() {
     addSubview(collectionView)
   }
@@ -60,14 +60,14 @@ extension HomeView: CodeView {
   }
 }
 
-// MARK: HomeViewProtocol
+// MARK: CartViewProtocol
 
-protocol HomeViewProtocol: UIView {
+protocol CartViewProtocol: UIView {
   func reloadProducts()
   func setupCollection(delegate: (UICollectionViewDataSource))
 }
 
-extension HomeView: HomeViewProtocol {
+extension CartView: CartViewProtocol {
   func reloadProducts() {
     collectionView.reloadData()
   }

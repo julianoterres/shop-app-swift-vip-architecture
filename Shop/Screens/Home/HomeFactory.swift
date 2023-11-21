@@ -34,10 +34,10 @@ final class HomeFactory {
       cart: cart
     )
     
-    let homeView = HomeView()
+    let view = HomeView()
     
     let viewController = HomeViewController(
-      screenView: homeView,
+      screenView: view,
       interactor: interactor
     )
     

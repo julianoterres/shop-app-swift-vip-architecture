@@ -40,6 +40,7 @@ extension HomeRouter: HomeRouterProtocol {
 
 private extension HomeRouter {
   func navigationToCart() {
-    
+    let cartScreen = CartFactory.create()
+    viewController?.navigationController?.pushViewController(cartScreen, animated: true)
   }
 }
