@@ -8,7 +8,7 @@ This project was building using the VIP and Clean code and Swift Package Manager
 
 ## Unit Tests
 
-This project use the XCTests to make a tests
+To demonstrate knowledge about unit testing, in this project we carried out unit testing of the HomeInteractor class, which represents the business layer of the Home screen.
 
 ## Clone repository
 
