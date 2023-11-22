@@ -88,16 +88,15 @@ private extension ListPricesView {
   }
   
   func setupRegularPrice() {
-    guard viewModel?.isPromotion == true else {
-      regularPriceLabel.text = viewModel?.regularPrice
-      return
-    }
-    regularPriceLabel.attributedText = viewModel?.regularPrice.strikeThrough
+    let prefixText = viewModel?.isPromotion == true ? "DE: " : .empty
+    let price = "\(prefixText)\(viewModel?.regularPrice ?? .empty)"
+    
+    regularPriceLabel.text = price
   }
   
   func setupActualPrice() {
-    actualPriceLabel.text = viewModel?.actualPrice
-    actualPriceLabel.isHidden = viewModel?.isPromotion == false
+    actualPriceLabel.text = "POR: \(viewModel?.actualPrice ?? .empty)"
+    actualPriceLabel.isHidden =  viewModel?.isPromotion == false
   }
 }
 
@@ -106,7 +105,7 @@ private extension ListPricesView {
 extension ListPricesView {
   func clear() {
     regularPriceLabel.text = .empty
-    regularPriceLabel.attributedText = NSAttributedString(string: "")
+    regularPriceLabel.attributedText = nil
     actualPriceLabel.text = .empty
     actualPriceLabel.isHidden = false
   }

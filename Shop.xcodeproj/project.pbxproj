@@ -30,7 +30,6 @@
 		E30C2CFF2B0C2CE300530D71 /* UICollectionView+Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2CFE2B0C2CE300530D71 /* UICollectionView+Register.swift */; };
 		E30C2D012B0C2D1300530D71 /* UIView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2D002B0C2D1300530D71 /* UIView+Reusable.swift */; };
 		E30C2D052B0C32F700530D71 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E30C2D042B0C32F700530D71 /* Kingfisher */; };
-		E30C2D072B0C3A8200530D71 /* String+StrikeThrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2D062B0C3A8200530D71 /* String+StrikeThrough.swift */; };
 		E30C2D0B2B0C3CAE00530D71 /* ListSizesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2D0A2B0C3CAE00530D71 /* ListSizesView.swift */; };
 		E30C2D0E2B0C400200530D71 /* UIStackView+SubViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2D0D2B0C400200530D71 /* UIStackView+SubViews.swift */; };
 		E30C2D112B0C43B000530D71 /* ListPricesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30C2D102B0C43B000530D71 /* ListPricesView.swift */; };
@@ -101,7 +100,6 @@
 		E30C2CFC2B0C2CC600530D71 /* UICollectionView+DequeueReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+DequeueReusable.swift"; sourceTree = "<group>"; };
 		E30C2CFE2B0C2CE300530D71 /* UICollectionView+Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Register.swift"; sourceTree = "<group>"; };
 		E30C2D002B0C2D1300530D71 /* UIView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Reusable.swift"; sourceTree = "<group>"; };
-		E30C2D062B0C3A8200530D71 /* String+StrikeThrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+StrikeThrough.swift"; sourceTree = "<group>"; };
 		E30C2D0A2B0C3CAE00530D71 /* ListSizesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSizesView.swift; sourceTree = "<group>"; };
 		E30C2D0D2B0C400200530D71 /* UIStackView+SubViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+SubViews.swift"; sourceTree = "<group>"; };
 		E30C2D102B0C43B000530D71 /* ListPricesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPricesView.swift; sourceTree = "<group>"; };
@@ -232,7 +230,6 @@
 			children = (
 				E3C10D092B0D4DF6008D12AF /* String+Contains.swift */,
 				E30C2CCD2B0BF6AD00530D71 /* String+Empty.swift */,
-				E30C2D062B0C3A8200530D71 /* String+StrikeThrough.swift */,
 			);
 			path = String;
 			sourceTree = "<group>";
@@ -735,7 +732,6 @@
 				E30C2CFD2B0C2CC600530D71 /* UICollectionView+DequeueReusable.swift in Sources */,
 				E30C2CDA2B0BFAFF00530D71 /* NetworkEndpoints.swift in Sources */,
 				E30C2D0E2B0C400200530D71 /* UIStackView+SubViews.swift in Sources */,
-				E30C2D072B0C3A8200530D71 /* String+StrikeThrough.swift in Sources */,
 				E30C2CE22B0C15E000530D71 /* ProductsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
