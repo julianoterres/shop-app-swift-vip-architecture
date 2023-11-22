@@ -6,14 +6,14 @@
 //
 
 struct ProductApiModel: Codable {
-  let actualPrice: String
+  let actualPrice: Double
   let color: String
   let discountPercentage: String
   let image: String
   let installments: String
   let name: String
   let onSale: Bool
-  let regularPrice: String
+  let regularPrice: Double
   let sizes: [ProductSizeApiModel]
   let style: String
   

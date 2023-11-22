@@ -89,9 +89,9 @@ private extension HomePresenter {
   
   func parsePrices(product: ProductApiModel) -> ListPricesViewModel {
     ListPricesViewModel(
-      regularPrice: product.regularPrice,
-      actualPrice: product.actualPrice,
-      isPromotion: product.regularPrice != product.actualPrice
+      regularPrice: product.regularPrice.fortmatToCurrency,
+      actualPrice: product.actualPrice.fortmatToCurrency,
+      isPromotion: product.actualPrice < product.regularPrice 
     )
   }
   

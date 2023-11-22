@@ -15,5 +15,5 @@ enum NetworkEndpoints: String, Codable {
 
   // MARK: Products
 
-  case productsList = "/211abc1c-d875-487c-9819-4e4b41905b4a"
+  case productsList = "/f7de77d2-286f-4a36-844d-a113ed7e4c24"
 }

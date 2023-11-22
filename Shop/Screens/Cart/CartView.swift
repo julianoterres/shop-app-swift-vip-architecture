@@ -26,6 +26,14 @@ class CartView: UIView {
     
     return collectionView
   }()
+  
+  lazy var totalLabel: UILabel = {
+    let element = UILabel()
+    element.textColor = .white
+    element.backgroundColor = .black
+    element.textAlignment = .center
+    return element
+  }()
 
   // MARK: Inicialization
 
@@ -45,13 +53,19 @@ class CartView: UIView {
 extension CartView: CodeView {
   func buildViewHierarchy() {
     addSubview(collectionView)
+    addSubview(totalLabel)
   }
 
   func setupConstraints() {
     collectionView.snp.makeConstraints {
       $0.top.equalTo(safeAreaLayoutGuide.snp.top)
+      $0.leading.trailing.equalToSuperview()
+    }
+    totalLabel.snp.makeConstraints {
+      $0.top.equalTo(collectionView.snp.bottom)
       $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
       $0.leading.trailing.equalToSuperview()
+      $0.height.equalTo(60)
     }
   }
 
@@ -65,6 +79,7 @@ extension CartView: CodeView {
 protocol CartViewProtocol: UIView {
   func reloadProducts()
   func setupCollection(delegate: (UICollectionViewDataSource))
+  func setup(total: String)
 }
 
 extension CartView: CartViewProtocol {
@@ -74,5 +89,9 @@ extension CartView: CartViewProtocol {
   
   func setupCollection(delegate: (UICollectionViewDataSource)) {
     collectionView.dataSource = delegate
+  }
+  
+  func setup(total: String) {
+    totalLabel.text = total
   }
 }

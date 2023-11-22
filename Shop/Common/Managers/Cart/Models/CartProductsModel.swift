@@ -10,5 +10,5 @@ struct CartProductsModel: Codable, Equatable {
   let name: String
   let image: String
   let size: String
-  let price: String
+  let price: Double
 }

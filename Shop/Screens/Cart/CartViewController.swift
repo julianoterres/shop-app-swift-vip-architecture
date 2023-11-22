@@ -49,12 +49,17 @@ final class CartViewController: UIViewController {
 
 protocol CartViewControllerProtocol: AnyObject {
   func present(products: [CartProductListCellViewModel])
+  func present(total: String)
 }
 
 extension CartViewController: CartViewControllerProtocol {
   func present(products: [CartProductListCellViewModel]) {
     self.products = products
     screenView.reloadProducts()
+  }
+  
+  func present(total: String) {
+    screenView.setup(total: total)
   }
 }
 
